@@ -34,7 +34,8 @@ namespace com.tictactoe.game
 
 		public void ResetGame()
 		{
-			soundManager.PlayStartGameSound();
+			if (soundManager.PlayStartSound)
+				soundManager.PlayStartGameSound();
 			uiController.ResetGame();
 			turnTaker = 0;
 			boardController.ResetBoard();
