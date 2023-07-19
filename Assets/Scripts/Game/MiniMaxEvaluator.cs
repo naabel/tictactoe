@@ -34,7 +34,7 @@ namespace com.tictactoe.game
 
 			if (initialNumEmpty > 99)
 				depthTolerance = 2;
-			if (initialNumEmpty > 21)
+			else if (initialNumEmpty > 21)
 				depthTolerance = 3;
 			else if (initialNumEmpty > 16)
 				depthTolerance = 4;
@@ -84,7 +84,7 @@ namespace com.tictactoe.game
 							// Call minimax recursively and choose
 							// the maximum value
 							score = Minimax(boardData, depth + 1, !isMax, alpha, beta, initialNumEmpty);
-							if (score > alpha)
+							if (score > alpha) // At depth 0, alpha = int.minValue
 							{
 								alpha = score;
 								best = score;
@@ -93,7 +93,7 @@ namespace com.tictactoe.game
 							// Undo the move
 							boardData.SetTileValue(i, j, TileData.Value.Empty);
 
-							//cut off
+							//cut off (prune) - The minimizer, in the preceding state, will not make a (non-optimal) move that allows for any of the terminal states under this one, so we can stop traversing (break)
 							if (alpha >= beta)
 							{
 								break;
@@ -129,7 +129,7 @@ namespace com.tictactoe.game
 
 							// Call minimax recursively and choose the minimum value
 							score = Minimax(boardData, depth + 1, !isMax, alpha, beta, initialNumEmpty);
-							if (score < beta)
+							if (score < beta) // At depth 0, beta = int.maxValue
 							{
 								beta = score;
 								best = score;
@@ -138,7 +138,7 @@ namespace com.tictactoe.game
 							// Undo the move
 							boardData.SetTileValue(i, j, TileData.Value.Empty);
 
-							//cut off
+							//cut off (prune)
 							if (alpha >= beta)
 							{
 								break;
