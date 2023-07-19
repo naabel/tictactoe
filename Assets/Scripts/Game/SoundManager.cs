@@ -9,6 +9,9 @@ namespace com.tictactoe.game
 		[SerializeField] private AudioSource sfxSource;
 		[SerializeField] private float sfxVolume = 1.0f;
 
+		[field: SerializeField]
+		public bool PlayStartSound { get; set; } = true;
+
 		public void PlayTileClickSound()
 		{
 			PlaySfx(sfxMapper.tileClickSound);
